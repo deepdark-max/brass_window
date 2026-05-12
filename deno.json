@@ -1,7 +1,7 @@
 {
   "name": "@brass/window",
-  "version": "0.0.27",
-  "description": "Native Windows Window Creation, Configuration, and Event Listening — A Win32 Window Management Library based on Deno FFI",
+  "version": "0.0.28",
+  "description": "Native Windows window creation, configuration, and event listening via Deno FFI",
   "exports": {
     ".": "./mod.ts"
   },
@@ -19,6 +19,7 @@
   "publish": {
     "include": [
       "deno.json",
+      "README.md",
       "mod.ts",
       "build/brassWindow.dll.ts",
       "src/**/*.ts"
