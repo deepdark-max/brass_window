@@ -36,8 +36,8 @@
   },
   "tasks": {
     "build:windows": "deno run --allow-all ./native/windows/build.ts",
-    "test:dev": "if exist brassWindow.dll (del /f /q brassWindow.dll) & deno run --allow-all --unstable-webgpu ./test/dev.ts",
-    "test:systemInfo": "if exist brassWindow.dll (del /f /q brassWindow.dll) & deno run --allow-all ./test/systemInfo.ts",
-    "example:flycamera": "if exist brassWindow.dll (del /f /q brassWindow.dll) & deno run --allow-all --unstable-webgpu ./examples/flyCamera.ts"
+    "test:dev": "rm -f ./brassWindow.dll; deno run --allow-all --unstable-webgpu ./test/dev.ts",
+    "test:systemInfo": "rm -f ./brassWindow.dll; deno run --allow-all ./test/systemInfo.ts",
+    "example:flycamera": "rm -f ./brassWindow.dll; deno run --allow-all --unstable-webgpu ./examples/flyCamera.ts"
   }
 }
