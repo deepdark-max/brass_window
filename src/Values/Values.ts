@@ -37,6 +37,26 @@ import { DisplayDeviceMode } from "./enums/DisplayDeviceMode.ts";
 import { WindowPosition } from "./enums/WindowPosition.ts";
 import { EventFlags } from "./enums/EventFlags.ts";
 
+/**
+ * Win32 constants namespace.
+ *
+ * Provides access to all Win32 enum constants used throughout the library:
+ * window styles, virtual key codes, window messages, system metrics, etc.
+ *
+ * @example
+ * ```ts
+ * import { Values } from "@brass/window";
+ *
+ * // Virtual key codes
+ * Values.VirtualKeys.VK_ESCAPE // 0x1B
+ *
+ * // Window styles
+ * Values.WindowStyle.WS_OVERLAPPEDWINDOW
+ *
+ * // Window messages
+ * Values.WindowMessage.WM_CLOSE
+ * ```
+ */
 export const Values = {
   SystemMetrics,
   ShowWindow,
