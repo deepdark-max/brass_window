@@ -1,0 +1,27 @@
+# Deno
+deno.lock
+
+# Build output
+brassWindow.dll
+*.o
+*.obj
+*.exp
+*.lib
+
+# Native
+native/windows/build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Environment
+.env
+.env.local

@@ -1,0 +1,42 @@
+{
+  "name": "@brass/window",
+  "version": "0.0.27",
+  "description": "Native Windows Window Creation, Configuration, and Event Listening — A Win32 Window Management Library based on Deno FFI",
+  "exports": {
+    ".": "./mod.ts"
+  },
+  "license": "MIT",
+  "keywords": [
+    "windows",
+    "win32",
+    "window",
+    "gui",
+    "desktop",
+    "native",
+    "ffi",
+    "deno"
+  ],
+  "publish": {
+    "include": [
+      "deno.json",
+      "mod.ts",
+      "build/brassWindow.dll.ts",
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "native/",
+      "test/",
+      "examples/"
+    ]
+  },
+  "imports": {
+    "@std/assert": "jsr:@std/assert@^1.0.0",
+    "wgpu-matrix": "npm:wgpu-matrix@^3.4.2"
+  },
+  "tasks": {
+    "build:windows": "deno run --allow-all ./native/windows/build.ts",
+    "test:dev": "if exist brassWindow.dll (del /f /q brassWindow.dll) & deno run --allow-all --unstable-webgpu ./test/dev.ts",
+    "test:systemInfo": "if exist brassWindow.dll (del /f /q brassWindow.dll) & deno run --allow-all ./test/systemInfo.ts",
+    "example:flycamera": "if exist brassWindow.dll (del /f /q brassWindow.dll) & deno run --allow-all --unstable-webgpu ./examples/flyCamera.ts"
+  }
+}
