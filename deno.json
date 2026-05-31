@@ -1,6 +1,6 @@
 {
   "name": "@brass/window",
-  "version": "0.0.28",
+  "version": "0.0.29",
   "description": "Native Windows window creation, configuration, and event listening via Deno FFI",
   "exports": {
     ".": "./mod.ts"
@@ -25,6 +25,7 @@
       "src/**/*.ts"
     ],
     "exclude": [
+      "docs/",
       "native/",
       "test/",
       "examples/"

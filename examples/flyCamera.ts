@@ -1,4 +1,4 @@
-import { Application, SystemInfo, Values } from "@brass/window";
+import { Application, SystemInfo, Values } from "../mod.ts";
 import { mat4, vec3, type Vec3 } from "wgpu-matrix";
 
 const SHADER_CODE = `
@@ -290,7 +290,7 @@ async function main() {
 ║  WASD / Space / Shift  ─  move          ║
 ║  Mouse  ─  look                         ║
 ║  Scroll ─  speed                        ║
-║  ESC    ─  exit application             ║
+║  ESC    ─  exit Application             ║
 ╚══════════════════════════════════════════╝
   `);
 
