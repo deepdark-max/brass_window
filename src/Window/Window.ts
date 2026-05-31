@@ -1,5 +1,5 @@
 import type { WindowOptions, WindowEvents, WindowState } from "../types.ts";
-import type { HINSTANCE, HWND } from "../Values/types.ts"; 
+import type { HINSTANCE, HWND } from "../Values/types.ts";
 import { Values } from "../Values/Values.ts";
 import { TypedEmitter } from "./TypedEmitter/TypedEmitter.ts";
 import { libSymbols, toWCstr, setImeEnabled } from "../ffi.ts";
@@ -231,7 +231,7 @@ export class Window extends TypedEmitter<WindowEvents> {
     /**
      * Sets the window fullscreen state. Saves the current style and position when entering fullscreen, restores them on exit.
      *
-     * @since 0.0.27
+     * @since 0.0.29
      * @param value - true for fullscreen, false to exit fullscreen (toggles if omitted)
      * @returns this (chained call)
      */
@@ -240,7 +240,16 @@ export class Window extends TypedEmitter<WindowEvents> {
         if (newValue === this.state.isFullscreen) return this;
         if (newValue) {
             this._savedStyle = libSymbols.getWindowLongPtr(this.windowHandle, Values.WindowLong.GWL_STYLE);
-            this._savedRect = { x: this.x, y: this.y, w: this.width, h: this.height };
+            const rectBuf = new Uint8Array(16);
+            const rectView = new DataView(rectBuf.buffer);
+            const rectPtr = Deno.UnsafePointer.of(rectBuf);
+            libSymbols.getWindowRect(this.windowHandle, rectPtr);
+            this._savedRect = {
+                x: rectView.getInt32(0, true),
+                y: rectView.getInt32(4, true),
+                w: rectView.getInt32(8, true) - rectView.getInt32(0, true),
+                h: rectView.getInt32(12, true) - rectView.getInt32(4, true)
+            };
             const screenW = libSymbols.getSystemMetrics(Values.SystemMetrics.SM_CXSCREEN);
             const screenH = libSymbols.getSystemMetrics(Values.SystemMetrics.SM_CYSCREEN);
             const newStyle = this._savedStyle & ~BigInt(Values.WindowStyle.WS_OVERLAPPEDWINDOW);
@@ -261,7 +270,6 @@ export class Window extends TypedEmitter<WindowEvents> {
         this.state.isFullscreen = newValue;
         return this;
     }
-
     /**
      * Locks the mouse cursor to the window client area and hides the cursor. Commonly used for first-person game camera control.
      *
